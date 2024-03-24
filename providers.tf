@@ -7,6 +7,11 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "3.97.1"
     }
+
+    tls {
+      source = "hashicorp/tls"
+      version = "4.0.5"
+    }
   }
 }
 
@@ -22,3 +27,4 @@ provider "azurerm" {
 
   subscription_id = var.azure_subscription_id
 }
+
