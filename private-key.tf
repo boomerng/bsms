@@ -11,4 +11,5 @@ output "cluster_private_key" {
 
 output "cluster_public_key" {
   value = tls_private_key.key.public_key_pem
+  sensitive = true
 }

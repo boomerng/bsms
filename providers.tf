@@ -1,11 +1,10 @@
-# Initialises Terraform providers and sets their version numbers.
+# Documentation: https://www.terraform.io/docs/language/values/variables.html
+
 
 # Documentation: https://www.terraform.io/docs/language/providers/requirements.html
 # Documentation: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs
 provider "azurerm" {
   features {}
-
-  subscription_id = var.azure_subscription_id
 }
 
 provider "tls" {
@@ -14,9 +13,10 @@ provider "tls" {
   }
 }
 
-# Documentation: https://www.terraform.io/docs/language/values/variables.html
-variable "azure_subscription_id" {
-  type = string
+provider "kubernetes" {
+    host = azurerm_kubernetes_cluster.cluster.kube_config[0].host
+
+    client_certificate = base64decode(azurerm_kubernetes_cluster.cluster.kube_config[0].client_certificate)
+    client_key             = base64decode(azurerm_kubernetes_cluster.cluster.kube_config[0].client_key)
+    cluster_ca_certificate = base64decode(azurerm_kubernetes_cluster.cluster.kube_config[0].cluster_ca_certificate)
 }
-
-
